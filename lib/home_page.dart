@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: BounceInDown(
-          child: const Text('Allen'),
+          child: const Text('Jarvis'),
         ),
         leading: const Icon(Icons.menu),
         centerTitle: true,
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       generatedContent == null
-                          ? 'Good Morning, what task can I do for you?'
+                          ? 'Hello, what can I do for you?'
                           : generatedContent!,
                       style: TextStyle(
                         fontFamily: 'Cera Pro',
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(top: 10, left: 22),
                   child: const Text(
-                    'Here are a few features',
+                    'Maker : Ayush Gupta',
                     style: TextStyle(
                       fontFamily: 'Cera Pro',
                       color: Pallete.mainFontColor,
@@ -183,29 +183,29 @@ class _HomePageState extends State<HomePage> {
                     delay: Duration(milliseconds: start),
                     child: const FeatureBox(
                       color: Pallete.firstSuggestionBoxColor,
-                      headerText: 'ChatGPT',
+                      headerText: 'Here are a few features about me:',
                       descriptionText:
-                          'A smarter way to stay organized and informed with ChatGPT',
+                          'Hello! I am JARVIS\nI have been created as an AI voice assitant application which is compatible on both mobile and web. I have been created to help you with your daily tasks. \nYou can simply ask any type of questions and I will give you an answer to it.\nI use OpenAI api key to get its answer from the web and then provide them to you.\n\nFuture Scope: Adding variations for output voices other English male to increase compatibility.',
                     ),
                   ),
-                  SlideInLeft(
-                    delay: Duration(milliseconds: start + delay),
-                    child: const FeatureBox(
-                      color: Pallete.secondSuggestionBoxColor,
-                      headerText: 'Dall-E',
-                      descriptionText:
-                          'Get inspired and stay creative with your personal assistant powered by Dall-E',
-                    ),
-                  ),
-                  SlideInLeft(
-                    delay: Duration(milliseconds: start + 2 * delay),
-                    child: const FeatureBox(
-                      color: Pallete.thirdSuggestionBoxColor,
-                      headerText: 'Smart Voice Assistant',
-                      descriptionText:
-                          'Get the best of both worlds with a voice assistant powered by Dall-E and ChatGPT',
-                    ),
-                  ),
+                  // SlideInLeft(
+                  //   delay: Duration(milliseconds: start + delay),
+                  //   child: const FeatureBox(
+                  //     color: Pallete.secondSuggestionBoxColor,
+                  //     headerText: 'Dall-E',
+                  //     descriptionText:
+                  //         'Get inspired and stay creative with your personal assistant powered by Dall-E',
+                  //   ),
+                  // ),
+                  // SlideInLeft(
+                  //   delay: Duration(milliseconds: start + 2 * delay),
+                  //   child: const FeatureBox(
+                  //     color: Pallete.thirdSuggestionBoxColor,
+                  //     headerText: 'Smart Voice Assistant',
+                  //     descriptionText:
+                  //         'Get the best of both worlds with a voice assistant powered by Dall-E and ChatGPT',
+                  //   ),
+                  // ),
                 ],
               ),
             )
@@ -216,17 +216,18 @@ class _HomePageState extends State<HomePage> {
         delay: Duration(milliseconds: start + 3 * delay),
         child: FloatingActionButton(
           backgroundColor: Pallete.firstSuggestionBoxColor,
-          onPressed: () async {
-            if (await speechToText.hasPermission &&
-                speechToText.isNotListening) {
+          onPressed: () async{
+            if(await speechToText.hasPermission &&
+                speechToText.isNotListening){
               await startListening();
-            } else if (speechToText.isListening) {
+            } else if (speechToText.isListening){
               final speech = await openAIService.isArtPromptAPI(lastWords);
-              if (speech.contains('https')) {
-                generatedImageUrl = speech;
-                generatedContent = null;
-                setState(() {});
-              } else {
+              if(speech.contains('https')){
+                generatedImageUrl=speech;
+                generatedContent=null;
+                setState((){});
+              }
+              else{
                 generatedImageUrl = null;
                 generatedContent = speech;
                 setState(() {});
